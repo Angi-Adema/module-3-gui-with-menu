@@ -20,6 +20,9 @@ public class GUIWithMenu extends Application {
 	@Override
 	public void start(Stage stage) {
 		
+		// Set the BorderPane
+		borderPane = new BorderPane();
+		
 		// Add a title to the GUI
 		stage.setTitle("GUI Menu App");
 		
@@ -32,6 +35,11 @@ public class GUIWithMenu extends Application {
 		MenuItem opt2 = new MenuItem("Save Text to log.txt");
 		MenuItem opt3 = new MenuItem("Change Background to Green");
 		MenuItem opt4 = new MenuItem("Exit");
+		
+		// MenuItem 1: Print Date and Time to TextArea
+		
+		// Add all the menu items to the menu and add the menu to the menu bar
+		
 	}
 
 	public static void main(String[] args) {
