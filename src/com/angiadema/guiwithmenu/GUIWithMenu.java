@@ -9,12 +9,14 @@ import java.util.Random;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.layout.Background;
@@ -26,6 +28,7 @@ public class GUIWithMenu extends Application {
 	private BorderPane borderPane;
 	private TextArea textArea;
 	private Color greenHue;
+	private double greenHueValue;
 	
 	@Override
 	public void start(Stage stage) {
@@ -98,7 +101,17 @@ public class GUIWithMenu extends Application {
 		
 		// Add the MenuBar and TextArea to the BorderPane
 		borderPane.setTop(menuBar);
-		borderPane.setCenter(textArea);
+		
+		VBox box = new VBox();
+		box.setAlignment(Pos.CENTER);
+		
+		// Set a smaller size for TextArea
+		textArea.setMaxWidth(300);
+		textArea.setMaxHeight(150);
+		
+		box.getChildren().add(textArea);
+		
+		borderPane.setCenter(box);
 		
 		// Initialize a new Scene object, set the size, and show the scene
 		Scene scene = new Scene(borderPane, 500, 300);
@@ -125,7 +138,8 @@ public class GUIWithMenu extends Application {
 			
 			// Color falls between 0 - 360 with green around 120
 			// Set a range to select from of 100 - 140
-			double hue = 100 + random.nextDouble() * 40;
+			// Save hue number in the TextArea
+			greenHueValue = 100 + random.nextDouble() * 40;
 			
 			// Set saturation to be between 0.7 - 1.0
 			double saturation = 0.7 + random.nextDouble() * 0.3;
@@ -134,7 +148,7 @@ public class GUIWithMenu extends Application {
 			double brightness = 0.7 + random.nextDouble() * 0.3;
 			
 			// Return the color
-			return Color.hsb(hue, saturation, brightness);
+			return Color.hsb(greenHueValue, saturation, brightness);
 		}
 		
 		// Method to set the background color
