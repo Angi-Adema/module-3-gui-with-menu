@@ -82,7 +82,7 @@ public class GUIWithMenu extends Application {
 				setBackgroundColor(greenHue);
 				
 				// Display the initial random hue value each time selected
-				textArea.setText("Background hue value: " + greenHueValue);
+				textArea.appendText("\nBackground hue value: " + greenHueValue);
 			}
 		});
 		
