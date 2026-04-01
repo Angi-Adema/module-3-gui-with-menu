@@ -51,24 +51,24 @@ public class GUIWithMenu extends Application {
 		Menu menu = new Menu("Menu");
 		
 		// Create menu items
-		MenuItem opt1 = new MenuItem("Display Date & Time");
-		MenuItem opt2 = new MenuItem("Save Text to log.txt");
-		MenuItem opt3 = new MenuItem("Change Background to Green");
-		MenuItem opt4 = new MenuItem("Exit");
+		MenuItem option1 = new MenuItem("Display Date & Time");
+		MenuItem option2 = new MenuItem("Save Text to log.txt");
+		MenuItem option3 = new MenuItem("Change Background to Green");
+		MenuItem option4 = new MenuItem("Exit");
 		
 		// MenuItem 1: Print Date and Time to TextArea
-		opt1.setOnAction(new EventHandler<ActionEvent>() {
+		option1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				LocalDateTime now = LocalDateTime.now();
 				DateTimeFormatter formatter = 
-						DateTimeFormatter.ofPattern("MM-dd-yy HH:mm:ss");
+						DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
 				textArea.setText("Current date and time: " + now.format(formatter));
 			}
 		});
 		
 		// MenuItem 2: Write TextArea content to log.txt
-		opt2.setOnAction(new EventHandler<ActionEvent>() {
+		option2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				writeTextToFile();
@@ -76,15 +76,18 @@ public class GUIWithMenu extends Application {
 		});
 		
 		// MenuItem 3: Change background color to a hue of green
-		opt3.setOnAction(new EventHandler<ActionEvent>() {
+		option3.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				setBackgroundColor(greenHue);
+				
+				// Display the initial random hue value each time selected
+				textArea.setText("Background hue value: " + greenHueValue);
 			}
 		});
 		
 		// MenuItem 4: Exit the program
-		opt4.setOnAction(new EventHandler<ActionEvent>() {
+		option4.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				stage.close();
@@ -92,10 +95,10 @@ public class GUIWithMenu extends Application {
 		});
 		
 		// Add the menu items to the menu and the menu to the menu bar
-		menu.getItems().add(opt1);
-		menu.getItems().add(opt2);
-		menu.getItems().add(opt3);
-		menu.getItems().add(opt4);
+		menu.getItems().add(option1);
+		menu.getItems().add(option2);
+		menu.getItems().add(option3);
+		menu.getItems().add(option4);
 		
 		menuBar.getMenus().add(menu);
 		
