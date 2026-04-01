@@ -1,7 +1,10 @@
 package com.angiadema.guiwithmenu;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,6 +15,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GUIWithMenu extends Application {
@@ -30,6 +34,9 @@ public class GUIWithMenu extends Application {
 		// Set TextArea
 		textArea = new TextArea();
 		textArea.setEditable(false);
+		
+		// Save a single green hue for whole program
+		greenHue = randomGreenHue();
 		
 		// Add a title to the GUI
 		stage.setTitle("GUI Menu App");
@@ -56,18 +63,58 @@ public class GUIWithMenu extends Application {
 		});
 		
 		// MenuItem 2: Write TextArea content to log.txt
+		opt2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				writeTextToFile();
+			}
+		});
 		
 		// MenuItem 3: Change background color to a hue of green
+		opt3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				setBackgroundColor(greenHue);
+			}
+		});
 		
 		// MenuItem 4: Exit the program
+		opt4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				applicationStage.close();
+			}
+		});
 		
-		// Add all the menu items to the menu and add the menu to the menu bar
+		// Method to write text to a file
+		private void writeTextToFile() {
+			try (FileWriter writer = new FileWriter("log.txt")) {
+				writer.write(textArea.getText());
+				textArea.appendText("\n\nText successfully saved in log.txt.");
+			} catch (IOException e) {
+				textArea.appendText("\n\nError writing the text to file.");
+			}
+			
+		}
 		
-		
-		
-		
-		
-	}
+		// Method to randomly select a hue of green
+		private Color randomGreenHue() {
+			// Use Random class to select a random number
+			Random random = new Random();
+			
+			// Color falls between 0 - 360 with green around 120
+			// Set a range to select from of 100 - 140
+			double hue = 100 + random.nextDouble() * 40;
+			
+			// Set saturation to be between 0.7 - 1.0
+			double saturation = 0.7 + random.nextDouble() * 0.3;
+			
+			// Set brightness to be between 0.7 - 1.0
+			double brightness = 0.7 + random.nextDouble() * 0.3;
+			
+			// Return the color
+			return Color.hsb(hue, saturation, brightness);
+		}
 
 	public static void main(String[] args) {
 		launch(args);
