@@ -17,6 +17,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 
 public class GUIWithMenu extends Application {
 	
@@ -82,9 +84,28 @@ public class GUIWithMenu extends Application {
 		opt4.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				applicationStage.close();
+				stage.close();
 			}
 		});
+		
+		// Add the menu items to the menu and the menu to the menu bar
+		menu.getItems().add(opt1);
+		menu.getItems().add(opt2);
+		menu.getItems().add(opt3);
+		menu.getItems().add(opt4);
+		
+		menuBar.getMenus().add(menu);
+		
+		// Add the MenuBar and TextArea to the BorderPane
+		borderPane.setTop(menuBar);
+		borderPane.setCenter(textArea);
+		
+		// Initialize a new Scene object, set the size, and show the scene
+		Scene scene = new Scene(borderPane, 500, 300);
+		stage.setScene(scene);
+		stage.show();
+		
+	}
 		
 		// Method to write text to a file
 		private void writeTextToFile() {
@@ -114,6 +135,11 @@ public class GUIWithMenu extends Application {
 			
 			// Return the color
 			return Color.hsb(hue, saturation, brightness);
+		}
+		
+		// Method to set the background color
+		private void setBackgroundColor(Color color) {
+			borderPane.setBackground(new Background(new BackgroundFill(color, null, null)));
 		}
 
 	public static void main(String[] args) {
