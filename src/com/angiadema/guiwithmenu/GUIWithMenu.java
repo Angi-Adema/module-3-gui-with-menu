@@ -141,7 +141,7 @@ public class GUIWithMenu extends Application {
 			
 			// Color falls between 0 - 360 with green around 120
 			// Set a range to select from of 100 - 140
-			// Save hue number in the TextArea
+			// Save hue value ensuring same color is used with each click
 			greenHueValue = 100 + random.nextDouble() * 40;
 			
 			// Set saturation to be between 0.7 - 1.0
