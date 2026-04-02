@@ -105,6 +105,7 @@ public class GUIWithMenu extends Application {
 		// Add the MenuBar and TextArea to the BorderPane
 		borderPane.setTop(menuBar);
 		
+		// Utilize VBox to position the TextArea
 		VBox box = new VBox();
 		box.setAlignment(Pos.CENTER);
 		
@@ -141,7 +142,7 @@ public class GUIWithMenu extends Application {
 			
 			// Color falls between 0 - 360 with green around 120
 			// Set a range to select from of 100 - 140
-			// Save hue value ensuring same color is used with each click
+			// Save hue value ensuring same color is used in same session
 			greenHueValue = 100 + random.nextDouble() * 40;
 			
 			// Set saturation to be between 0.7 - 1.0
